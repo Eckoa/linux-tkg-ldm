@@ -285,6 +285,9 @@ hackheaders() {
   msg2 "Installing KConfig files..."
   find . -name 'Kconfig*' -exec install -Dm644 {} "$builddir/{}" \;
 
+  msg2 "Copy signing keys for dkms..."
+  install -Dt "$builddir/certs" -m 400 certs/signing_key.*
+
   if [[ $(scripts/config -s CONFIG_RUST) = y ]]; then
     msg2 "Installing Rust files..."
     install -Dt "$builddir/rust" -m644 rust/*.rmeta
